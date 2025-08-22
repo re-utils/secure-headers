@@ -2,8 +2,16 @@
   "name": "secure-headers",
   "version": "0.0.2",
   "description": "Secure HTTP headers",
-  "keywords": [],
-  "repository": {},
+  "keywords": [
+    "http",
+    "headers",
+    "secure",
+    "cross-runtime"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/re-utils/secure-headers.git"
+  },
   "homepage": "https://re-utils.pages.dev",
   "license": "MIT",
   "type": "module",
