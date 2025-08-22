@@ -1,4 +1,4 @@
-export const init = (...srcs: any[]): string => srcs.filter((a) => typeof a === 'string').join('; ');
+export const init = (...srcs: [any, ...any[]]): string => srcs.filter((a) => typeof a === 'string').join('; ') || "default-src 'self'";
 
 // Directive values
 export const self = " 'self'";
