@@ -1,4 +1,5 @@
-export const init = (value: string): string => value.slice(2) || "default-src 'self'";
+export const init = (value: string): string =>
+  value.slice(2) || "default-src 'self'";
 
 // Directive values
 export const self = " 'self'";
@@ -11,11 +12,14 @@ export const inlineSpeculationRules = " 'inline-speculation-rules'";
 export const strictDynamic = " 'strict-dynamic'";
 export const reportSample = " 'report-sample'";
 
-export const createNonce = (sz: number, options?: Parameters<Uint8Array['toBase64']>[0]): () => string => {
+export const createNonce = (
+  sz: number,
+  options?: Parameters<Uint8Array['toBase64']>[0],
+): (() => string) => {
   // This is thread-safe lol no worries
   const buf = new Uint8Array(sz);
   return () => " 'nonce-" + crypto.getRandomValues(buf).toBase64(options) + "'";
-}
+};
 
 export const nonce = (value: string): string => " 'nonce-" + value + "'";
 export const hash = (alg: string, value: string): string =>

@@ -1,4 +1,13 @@
 Secure HTTP headers.
+```ts
+import { secureHeaders } from 'secure-headers';
+
+// Type-safe wrapper
+const headers = secureHeaders({
+  // Override default headers
+  'content-security-policy': 'script-src https://example.com'
+});
+```
 
 ### `Content-Security-Policy`
 ```ts
@@ -38,4 +47,15 @@ const reportingEnpoints = reportEndpoints({
   'csp-endpoint': 'https://example.com/csp-reports'
   'permissions-endpoint': 'https://example.com/permissions-policy-reports'
 });
+```
+
+### `Strict-Transport-Security`
+```ts
+import { sts } from 'secure-headers';
+
+// max age is required
+const transportSecurity = sts.maxAge(960000);
+
+// set other optional props
+const transportSecurity = sts.maxAge(960000) + sts.includeSubdomains + sts.preload;
 ```
