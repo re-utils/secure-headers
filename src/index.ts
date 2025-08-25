@@ -1,7 +1,7 @@
-export * as csp from './csp/index.ts';
+export * as csp from './content-security-policy.ts';
 export * as sts from './strict-transport-security.ts';
 
-export const reportEndpoints = (endpoints: Record<string, string>): string =>
+export const reportingEndpoints = (endpoints: Record<string, string>): string =>
   Object.entries(endpoints)
     .map((pair) => pair[0] + '="' + pair[1] + '"')
     .join();
@@ -13,34 +13,37 @@ export interface Options {
   'strict-transport-security'?: string;
 
   'cross-origin-embedder-policy'?:
-  | 'unsafe-none'
-  | 'require-corp'
-  | 'credentialless';
-  'cross-origin-resource-policy'?:
-  | 'same-site'
-  | 'same-origin'
-  | 'cross-origin';
+    | 'unsafe-none'
+    | 'require-corp'
+    | 'credentialless';
+  'cross-origin-resource-policy'?: 'same-site' | 'same-origin' | 'cross-origin';
   'cross-origin-opener-policy'?:
-  | 'unsafe-none'
-  | 'same-origin-allow-popups'
-  | 'same-origin'
-  | 'noopener-allow-popups';
+    | 'unsafe-none'
+    | 'same-origin-allow-popups'
+    | 'same-origin'
+    | 'noopener-allow-popups';
 
   'referrer-policy'?:
-  | 'no-referrer'
-  | 'no-referrer-when-downgrade'
-  | 'origin'
-  | 'origin-when-cross-origin'
-  | 'same-origin'
-  | 'strict-origin'
-  | 'strict-origin-when-cross-origin'
-  | 'unsafe-url';
+    | 'no-referrer'
+    | 'no-referrer-when-downgrade'
+    | 'origin'
+    | 'origin-when-cross-origin'
+    | 'same-origin'
+    | 'strict-origin'
+    | 'strict-origin-when-cross-origin'
+    | 'unsafe-url';
 
   'origin-agent-cluster'?: '?0' | '?1';
 
   'x-frame-options'?: 'DENY' | 'SAMEORIGIN';
   'x-content-type-options'?: 'nosniff';
-  'x-permitted-cross-domain-policies'?: 'none' | 'master-only' | 'by-content-type' | 'by-ftp-filename' | 'all' | 'none-this-response';
+  'x-permitted-cross-domain-policies'?:
+    | 'none'
+    | 'master-only'
+    | 'by-content-type'
+    | 'by-ftp-filename'
+    | 'all'
+    | 'none-this-response';
 }
 
 export const defaults: Options = {
@@ -53,9 +56,10 @@ export const defaults: Options = {
   'strict-transport-security': 'max-age=15552000; includeSubDomains',
   'x-frame-options': 'SAMEORIGIN',
   'x-content-type-options': 'nosniff',
-  'x-permitted-cross-domain-policies': 'none'
+  'x-permitted-cross-domain-policies': 'none',
 };
 
-export const secureHeaders = (headers?: Options): Options => ({
-  ...defaults, ...headers
+export default (headers?: Options): Options => ({
+  ...defaults,
+  ...headers,
 });

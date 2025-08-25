@@ -1,3 +1,3 @@
 export const maxAge = (age: number): string => 'max-age=' + age;
-export const includeSubDomains = '; includeSubDomains';
+export const includeSubdomains = '; includeSubDomains';
 export const preload = '; preload';
